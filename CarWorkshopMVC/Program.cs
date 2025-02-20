@@ -1,3 +1,7 @@
+using Infrastructure.Persistance;
+using Microsoft.EntityFrameworkCore;
+using Infrastructure.Extensions;
+
 namespace CarWorkshopMVC
 {
     public class Program
@@ -8,6 +12,9 @@ namespace CarWorkshopMVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // SQL Server configuration
+            builder.Services.AddInfrastructure(builder.Configuration);
 
             var app = builder.Build();
 
