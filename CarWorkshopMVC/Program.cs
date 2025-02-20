@@ -2,6 +2,7 @@ using Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Extensions;
 using Infrastructure.Seeders;
+using Application.Extensions;
 
 namespace CarWorkshopMVC
 {
@@ -16,6 +17,7 @@ namespace CarWorkshopMVC
 
             // SQL Server configuration
             builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddApplication();
 
             var app = builder.Build();
 

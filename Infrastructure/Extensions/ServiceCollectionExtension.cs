@@ -1,4 +1,6 @@
-﻿using Infrastructure.Persistance;
+﻿using Domain.Interfaces;
+using Infrastructure.Persistance;
+using Infrastructure.Repositories;
 using Infrastructure.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +21,7 @@ namespace Infrastructure.Extensions
                 options.UseSqlServer(configuration.GetConnectionString("CarWorkshopDB")));
 
             service.AddScoped<CarWorkshopSeeder>();
+            service.AddScoped<ICarWorkshopRepository, CarWorkshopRepository>();
         }
     }
 }
