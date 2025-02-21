@@ -1,8 +1,10 @@
-﻿using Application.Services;
+﻿using Application.Mappings;
+using Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +15,7 @@ namespace Application.Extensions
         public static void AddApplication(this IServiceCollection service)
         {
             service.AddScoped<ICarWorkshopService, CarWorkshopService>();
+            service.AddAutoMapper(typeof(CarWorkshopMappingProfile));
         }
     }
 }

@@ -2,7 +2,9 @@
 using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Persistance;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Application.CarWorkshop;
 
 namespace CarWorkshopMVC.Controllers
 {
@@ -22,9 +24,9 @@ namespace CarWorkshopMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CarWorkshop workshop)
+        public async Task<IActionResult> Create(CarWorkshopDto newWorkshopDto)
         {
-            await _carWorkshopService.Create(workshop);
+            await _carWorkshopService.Create(newWorkshopDto);
             return RedirectToAction(nameof(Create));
         }
     }
