@@ -10,5 +10,6 @@ namespace Domain.Interfaces
     public interface ICarWorkshopRepository
     {
         Task Create(CarWorkshop carWorkshop);
+        Task<IEnumerable<CarWorkshop>> GetAll();
     }
 }

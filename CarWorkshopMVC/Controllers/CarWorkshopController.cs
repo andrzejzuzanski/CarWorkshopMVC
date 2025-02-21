@@ -29,9 +29,16 @@ namespace CarWorkshopMVC.Controllers
             if (ModelState.IsValid)
             {
                 await _carWorkshopService.Create(newWorkshopDto);
-                return RedirectToAction(nameof(Create));
+                return RedirectToAction(nameof(Index));
             }
             return View(newWorkshopDto);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var carWorkshops = await _carWorkshopService.GetAll();
+            return View(carWorkshops);
         }
     }
 }

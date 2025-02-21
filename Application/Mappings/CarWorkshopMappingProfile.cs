@@ -21,6 +21,12 @@ namespace Application.Mappings
                     PhoneNumber = src.PhoneNumber,
                     PostalCode = src.PostalCode
                 }));
+
+            CreateMap<Domain.Entities.CarWorkshop, CarWorkshopDto>()
+                .ForMember(cwd => cwd.City, opt => opt.MapFrom(src => src.ContactDetails.City))
+                .ForMember(cwd => cwd.Street, opt => opt.MapFrom(src => src.ContactDetails.Street))
+                .ForMember(cwd => cwd.PostalCode, opt => opt.MapFrom(src => src.ContactDetails.PostalCode))
+                .ForMember(cwd => cwd.PhoneNumber, opt => opt.MapFrom(src => src.ContactDetails.PhoneNumber));
         }
     }
 }
