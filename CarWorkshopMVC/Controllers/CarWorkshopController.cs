@@ -37,18 +37,6 @@ namespace CarWorkshopMVC.Controllers
             return View(newWorkshopDto);
         }
 
-        [HttpPost]
-        [Route("CarWorkshop/{encodedName}/Edit")]
-        public async Task<IActionResult> Edit(string encodedName, EditCarWorkshopDto editCarWorkshop)
-        {
-            if (ModelState.IsValid)
-            {
-                await _carWorkshopService.Edit(encodedName, editCarWorkshop);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(editCarWorkshop);
-        }
-
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -57,21 +45,33 @@ namespace CarWorkshopMVC.Controllers
         }
 
         [HttpGet]
-        [Route("CarWorkshop/{encodedName}/Details")]
-        public async Task<IActionResult> Details(string encodedName)
+        [Route("CarWorkshop/{id}/Details")]
+        public async Task<IActionResult> Details(int id)
         {
-            var carWorkshop = await _carWorkshopService.Details(encodedName);
+            var carWorkshop = await _carWorkshopService.Details(id);
             return View(carWorkshop);
         }
 
         [HttpGet]
-        [Route("CarWorkshop/{encodedName}/Edit")]
-        public async Task<IActionResult> Edit(string encodedName)
+        [Route("CarWorkshop/{id}/Edit")]
+        public async Task<IActionResult> Edit(int id)
         {
-            var carWorkshop = await _carWorkshopService.Details(encodedName);
+            var carWorkshop = await _carWorkshopService.Details(id);
             var editDto = _mapper.Map<EditCarWorkshopDto>(carWorkshop);
 
             return View(editDto);
+        }
+
+        [HttpPost]
+        [Route("CarWorkshop/{id}/Edit")]
+        public async Task<IActionResult> Edit(int id, EditCarWorkshopDto editCarWorkshop)
+        {
+            if (ModelState.IsValid)
+            {
+                await _carWorkshopService.Edit(id, editCarWorkshop);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(editCarWorkshop);
         }
 
     }

@@ -25,18 +25,18 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<CarWorkshop> Details(string encodedName)
-        {
-            var carWorkshop = await _context.CarWorkshops.FirstAsync(cw => cw.EncodedName == encodedName);
-            return carWorkshop;
-        }
-
         public async Task<IEnumerable<CarWorkshop>> GetAll()
         {
             var carWorkshops = await _context.CarWorkshops
                 .AsNoTracking()
                 .ToListAsync();
             return carWorkshops;
+        }
+
+        public async Task<CarWorkshop> Details(int id)
+        {
+            var carWorkshop = await _context.CarWorkshops.FirstAsync(cw => cw.Id == id);
+            return carWorkshop;
         }
     }
 }

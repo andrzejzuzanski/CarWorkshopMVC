@@ -21,17 +21,23 @@ namespace Application.Services
             carWorkshop.EncodeName();
             await _carWorkshopRepository.Create(carWorkshop);
         }
-
-        public async Task<CarWorkshopDto> Details(string encodedName)
+        public async Task<IEnumerable<CarWorkshopDto>> GetAll()
         {
-            var carWorkshop = await _carWorkshopRepository.Details(encodedName);
+            var carWorkshops = await _carWorkshopRepository.GetAll();
+            var carWorkshopDtos = _mapper.Map<IEnumerable<CarWorkshopDto>>(carWorkshops);
+            return carWorkshopDtos;
+        }
+
+        public async Task<CarWorkshopDto> Details(int id)
+        {
+            var carWorkshop = await _carWorkshopRepository.Details(id);
             var carWorkshopDto = _mapper.Map<CarWorkshopDto>(carWorkshop);
             return carWorkshopDto;
         }
 
-        public async Task Edit(string encodedName, EditCarWorkshopDto editCarWorkshop)
+        public async Task Edit(int id, EditCarWorkshopDto editCarWorkshop)
         {
-            var carWorkshop = await _carWorkshopRepository.Details(encodedName);
+            var carWorkshop = await _carWorkshopRepository.Details(id);
 
             carWorkshop.Name = editCarWorkshop.Name;
             carWorkshop.Description = editCarWorkshop.Description;
@@ -39,15 +45,11 @@ namespace Application.Services
             carWorkshop.ContactDetails.PhoneNumber = editCarWorkshop.PhoneNumber;
             carWorkshop.ContactDetails.PostalCode = editCarWorkshop.PostalCode;
             carWorkshop.ContactDetails.Street = editCarWorkshop.Street;
+            carWorkshop.EncodeName();
 
             await _carWorkshopRepository.Commit();
         }
 
-        public async Task<IEnumerable<CarWorkshopDto>> GetAll()
-        {
-            var carWorkshops = await _carWorkshopRepository.GetAll();
-            var carWorkshopDtos = _mapper.Map<IEnumerable<CarWorkshopDto>>(carWorkshops);
-            return carWorkshopDtos;
-        }
+
     }
 }
