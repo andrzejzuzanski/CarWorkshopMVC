@@ -40,5 +40,14 @@ namespace CarWorkshopMVC.Controllers
             var carWorkshops = await _carWorkshopService.GetAll();
             return View(carWorkshops);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(string encodedName)
+        {
+            var carWorkshop = await _carWorkshopService.Details(encodedName);
+            return View(carWorkshop);
+        }
+
+
     }
 }

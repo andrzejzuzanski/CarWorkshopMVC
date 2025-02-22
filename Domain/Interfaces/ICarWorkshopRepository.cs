@@ -11,5 +11,6 @@ namespace Domain.Interfaces
     {
         Task Create(CarWorkshop carWorkshop);
         Task<IEnumerable<CarWorkshop>> GetAll();
+        Task<CarWorkshop> Details(string encodedName);
     }
 }

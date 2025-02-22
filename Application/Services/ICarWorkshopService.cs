@@ -7,5 +7,6 @@ namespace Application.Services
     {
         Task Create(CarWorkshopDto carWorkshop);
         Task<IEnumerable<CarWorkshopDto>> GetAll();
+        Task<CarWorkshopDto> Details(string encodedName);
     }
 }
