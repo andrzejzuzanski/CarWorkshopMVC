@@ -14,6 +14,11 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task Commit()
+        {
+            await _context.SaveChangesAsync();
+        }
+
         public async Task Create(CarWorkshop carWorkshop)
         {
             _context.CarWorkshops.Add(carWorkshop);

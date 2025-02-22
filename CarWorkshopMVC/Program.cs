@@ -15,6 +15,7 @@ namespace CarWorkshopMVC
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+
             // SQL Server configuration
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();

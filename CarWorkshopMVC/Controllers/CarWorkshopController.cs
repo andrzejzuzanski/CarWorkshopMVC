@@ -5,16 +5,19 @@ using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Application.CarWorkshop;
+using AutoMapper;
 
 namespace CarWorkshopMVC.Controllers
 {
     public class CarWorkshopController : Controller
     {
         private readonly ICarWorkshopService _carWorkshopService;
+        private readonly IMapper _mapper;
 
-        public CarWorkshopController(ICarWorkshopService carWorkshopService)
+        public CarWorkshopController(ICarWorkshopService carWorkshopService, IMapper mapper)
         {
             _carWorkshopService = carWorkshopService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,6 +37,18 @@ namespace CarWorkshopMVC.Controllers
             return View(newWorkshopDto);
         }
 
+        [HttpPost]
+        [Route("CarWorkshop/{encodedName}/Edit")]
+        public async Task<IActionResult> Edit(string encodedName, EditCarWorkshopDto editCarWorkshop)
+        {
+            if (ModelState.IsValid)
+            {
+                await _carWorkshopService.Edit(encodedName, editCarWorkshop);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(editCarWorkshop);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -42,12 +57,22 @@ namespace CarWorkshopMVC.Controllers
         }
 
         [HttpGet]
+        [Route("CarWorkshop/{encodedName}/Details")]
         public async Task<IActionResult> Details(string encodedName)
         {
             var carWorkshop = await _carWorkshopService.Details(encodedName);
             return View(carWorkshop);
         }
 
+        [HttpGet]
+        [Route("CarWorkshop/{encodedName}/Edit")]
+        public async Task<IActionResult> Edit(string encodedName)
+        {
+            var carWorkshop = await _carWorkshopService.Details(encodedName);
+            var editDto = _mapper.Map<EditCarWorkshopDto>(carWorkshop);
+
+            return View(editDto);
+        }
 
     }
 }

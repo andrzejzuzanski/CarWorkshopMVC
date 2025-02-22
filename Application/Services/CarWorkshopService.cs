@@ -29,6 +29,20 @@ namespace Application.Services
             return carWorkshopDto;
         }
 
+        public async Task Edit(string encodedName, EditCarWorkshopDto editCarWorkshop)
+        {
+            var carWorkshop = await _carWorkshopRepository.Details(encodedName);
+
+            carWorkshop.Name = editCarWorkshop.Name;
+            carWorkshop.Description = editCarWorkshop.Description;
+            carWorkshop.ContactDetails.City = editCarWorkshop.City;
+            carWorkshop.ContactDetails.PhoneNumber = editCarWorkshop.PhoneNumber;
+            carWorkshop.ContactDetails.PostalCode = editCarWorkshop.PostalCode;
+            carWorkshop.ContactDetails.Street = editCarWorkshop.Street;
+
+            await _carWorkshopRepository.Commit();
+        }
+
         public async Task<IEnumerable<CarWorkshopDto>> GetAll()
         {
             var carWorkshops = await _carWorkshopRepository.GetAll();
