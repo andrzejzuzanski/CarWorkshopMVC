@@ -62,7 +62,12 @@ namespace CarWorkshopMVC.Controllers
             var carWorkshop = await _carWorkshopService.Details(id);
             var editDto = _mapper.Map<EditCarWorkshopDto>(carWorkshop);
 
+            if (!editDto.IsEditable)
+            {
+                return RedirectToAction("NoAccess", "Home");
+            }
             return View(editDto);
+
         }
 
         [HttpPost]
