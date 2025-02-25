@@ -44,7 +44,7 @@ namespace CarWorkshopMVC
                 name: "default",
                 pattern: "{controller=CarWorkshop}/{action=Index}/{id?}")
                 .WithStaticAssets();
-
+            app.MapRazorPages();
             app.Run();
         }
     }

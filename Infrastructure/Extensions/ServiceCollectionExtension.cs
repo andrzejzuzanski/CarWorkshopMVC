@@ -2,6 +2,7 @@
 using Infrastructure.Persistance;
 using Infrastructure.Repositories;
 using Infrastructure.Seeders;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,9 @@ namespace Infrastructure.Extensions
 
             service.AddScoped<CarWorkshopSeeder>();
             service.AddScoped<ICarWorkshopRepository, CarWorkshopRepository>();
+
+            service.AddDefaultIdentity<IdentityUser>()
+                .AddEntityFrameworkStores<CarWorkshopContext>();
         }
     }
 }
