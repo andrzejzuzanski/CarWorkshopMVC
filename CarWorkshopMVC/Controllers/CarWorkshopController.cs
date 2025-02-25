@@ -82,5 +82,11 @@ namespace CarWorkshopMVC.Controllers
             return View(editCarWorkshop);
         }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _carWorkshopService.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

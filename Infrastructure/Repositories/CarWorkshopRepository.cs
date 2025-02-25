@@ -38,5 +38,12 @@ namespace Infrastructure.Repositories
             var carWorkshop = await _context.CarWorkshops.FirstAsync(cw => cw.Id == id);
             return carWorkshop;
         }
+
+        public async Task Delete(int id)
+        {
+            var carWorkshopToDelete = _context.CarWorkshops.FirstOrDefault(cw => cw.Id == id);
+            _context.CarWorkshops.Remove(carWorkshopToDelete!);
+            await _context.SaveChangesAsync();
+        }
     }
 }

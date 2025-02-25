@@ -9,5 +9,6 @@ namespace Application.Services
         Task<IEnumerable<CarWorkshopDto>> GetAll();
         Task<CarWorkshopDto> Details(int id);
         Task Edit(int id,EditCarWorkshopDto editCarWorkshop);
+        Task Delete(int id);
     }
 }

@@ -22,6 +22,7 @@
                 @if (item.IsEditable)
                 {
                     <a class="btn btn-outline-secondary" asp-controller="CarWorkshop" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-outline-danger" asp-controller="CarWorkshop" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 }
             </div>
         </div>

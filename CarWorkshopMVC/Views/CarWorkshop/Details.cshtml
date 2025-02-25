@@ -45,7 +45,9 @@
 <div>
     @if (Model.IsEditable)
     {
-        <a class="btn btn-outline-secondary" asp-controller="CarWorkshop" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a class="btn btn-primary" asp-controller="CarWorkshop" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a class="btn btn-danger" asp-controller="CarWorkshop" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+
     }
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
 </div>

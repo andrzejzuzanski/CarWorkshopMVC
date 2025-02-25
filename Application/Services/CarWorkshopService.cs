@@ -54,6 +54,9 @@ namespace Application.Services
             await _carWorkshopRepository.Commit();
         }
 
-
+        public async Task Delete(int id)
+        {
+            await _carWorkshopRepository.Delete(id);
+        }
     }
 }
