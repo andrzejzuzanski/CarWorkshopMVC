@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Application.CarWorkshop;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarWorkshopMVC.Controllers
 {
@@ -21,12 +22,14 @@ namespace CarWorkshopMVC.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CarWorkshopDto newWorkshopDto)
         {
             if (ModelState.IsValid)

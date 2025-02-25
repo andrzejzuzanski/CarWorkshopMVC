@@ -1,4 +1,5 @@
-﻿using Application.CarWorkshop;
+﻿using Application.ApplicationUser;
+using Application.CarWorkshop;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -9,16 +10,19 @@ namespace Application.Services
     {
         private readonly ICarWorkshopRepository _carWorkshopRepository;
         private readonly IMapper _mapper;
+        private readonly IUserContext _userContext;
 
-        public CarWorkshopService(ICarWorkshopRepository carWorkshopRepository, IMapper mapper)
+        public CarWorkshopService(ICarWorkshopRepository carWorkshopRepository, IMapper mapper, IUserContext userContext)
         {
             _carWorkshopRepository = carWorkshopRepository;
             _mapper = mapper;
+            _userContext = userContext;
         }
         public async Task Create(CarWorkshopDto carWorkshopDto)
         {
             var carWorkshop = _mapper.Map<Domain.Entities.CarWorkshop>(carWorkshopDto);
             carWorkshop.EncodeName();
+            carWorkshop.CreatedById = _userContext.GetCurrentUser().Id;
             await _carWorkshopRepository.Create(carWorkshop);
         }
         public async Task<IEnumerable<CarWorkshopDto>> GetAll()

@@ -1,4 +1,5 @@
-﻿using Application.Mappings;
+﻿using Application.ApplicationUser;
+using Application.Mappings;
 using Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,6 +17,7 @@ namespace Application.Extensions
         {
             service.AddScoped<ICarWorkshopService, CarWorkshopService>();
             service.AddAutoMapper(typeof(CarWorkshopMappingProfile));
+            service.AddScoped<IUserContext, UserContext>();
         }
     }
 }
